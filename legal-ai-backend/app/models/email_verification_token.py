@@ -1,7 +1,7 @@
 from datetime import datetime
 
 from sqlalchemy import DateTime, ForeignKey, String
-from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.models.base_entity import BaseEntity
 
@@ -29,4 +29,9 @@ class EmailVerificationToken(BaseEntity):
     verified_at: Mapped[datetime | None] = mapped_column(
         DateTime(timezone=True),
         nullable=True,
+    )
+
+    user = relationship(
+        "User",
+        foreign_keys=[user_id],
     )

@@ -1,4 +1,6 @@
-from sqlalchemy import String
+from datetime import datetime
+
+from sqlalchemy import DateTime, String
 from sqlalchemy.orm import Mapped, mapped_column
 
 from app.models.base_entity import BaseEntity
@@ -62,4 +64,9 @@ class User(BaseEntity):
     is_locked: Mapped[bool] = mapped_column(
         default=False,
         nullable=False
+    )
+
+    locked_until: Mapped[datetime | None] = mapped_column(
+        DateTime(timezone=True),
+        nullable=True
     )
